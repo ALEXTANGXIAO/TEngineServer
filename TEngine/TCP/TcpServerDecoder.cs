@@ -14,7 +14,7 @@ namespace TEngine
         protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object> output)
         {
             var mainPack = ProtoUtil.Deserialize(input.Array);
-            TLogger.LogInfo("Received from client:" + mainPack);
+            TLogger.LogInfo(context.Channel.RemoteAddress +":Received from client:" + mainPack);
             output.Add(mainPack);
             input.Clear();
         }

@@ -2,28 +2,33 @@
 
 namespace TEngine
 {
+    //TODO 
     public class SqlSugarMgr : TSingleton<SqlSugarMgr>
     {
-        ConnectionConfig connectionConfig;
-        SqlSugarClient database;
+        //用单例模式
+        private static SqlSugarScope database = new SqlSugarScope(new ConnectionConfig()
+        {
+            ConnectionString = "server=127.0.0.1;port=3306;uid=root;pwd=1234567;database=TEngine",
+            DbType = DbType.MySql,
+            IsAutoCloseConnection = true,
+            InitKeyType = InitKeyType.Attribute     //从实体特性中读取主键自增列信息
+        },
+         db =>
+         {
+             //(A)全局生效配置点
+             //调试SQL事件，可以删掉
+             db.Aop.OnLogExecuting = (sql, pars) =>
+             {
+                 TLogger.LogInfo(sql + "\r\n" +
+                 db.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
+                 Console.WriteLine();
+             };
+
+         });
+
         public SqlSugarMgr()
         {
-            connectionConfig = new ConnectionConfig()
-            {
-                ConnectionString = "server=.;uid=sa;pwd=@1234567;database=TEngineTest",
-                DbType = DbType.MySql,                  //设置数据库类型
-                IsAutoCloseConnection = true,           //自动释放数据务，如果存在事务，在事务结束后释放
-                InitKeyType = InitKeyType.Attribute     //从实体特性中读取主键自增列信息
-            };
-            database = new SqlSugarClient(connectionConfig);
-
-            //用来打印Sql方便你调试    
-            database.Aop.OnLogExecuting = (sql, pars) =>
-            {
-                Console.WriteLine(sql + "\r\n" +
-                database.Utilities.SerializeObject(pars.ToDictionary(it => it.ParameterName, it => it.Value)));
-                Console.WriteLine();
-            };
+            
         }
 
         #region Query
@@ -81,7 +86,7 @@ namespace TEngine
             database.Deleteable<StudentModel>(1).ExecuteCommand();
         }
 
-        private void CreateDatabase()
+        public void CreateDatabase()
         {
             database.CodeFirst.SetStringDefaultLength(200/*设置varchar默认长度为200*/).InitTables(typeof(StudentModel));//执行完数据库就有这个表了
         }

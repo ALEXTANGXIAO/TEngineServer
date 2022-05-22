@@ -87,7 +87,7 @@ static void RegisterController()
 
 ---
 
-引用类库：DotNet
+引用类库：DotNetty
 
 1. DotNetty.Buffers：对内存缓冲区管理的封装
 2. DotNetty.Codecs：对编解码的封装，包括一些基础基类的实现
@@ -102,4 +102,8 @@ DotNetty 是一个提供 asynchronous event-driven （异步事件驱动）的�
 “快速和简单”并不意味着应用程序会有难维护和性能低的问题，DotNetty 是一个精心设计的框架，它从许多协议的实现中吸收了很多的经验比如 FTP、SMTP、HTTP、许多二进制和基于文本的传统协议.因此，Netty 已经成功地找到一个方式,在不失灵活性的前提下来实现开发的简易性，高性能，稳定性。
 
 ## 快速使用
-1. 解决方案管理器窗口/管理NuGet包/添加DotNetty
+ 解决方案管理器窗口/管理NuGet包/添加DotNetty
+
+## <strong>技术支持
+ QQ群：967860570   
+ 欢迎大家提供意见和改进意见，不喜请友善提意见哈 谢谢~

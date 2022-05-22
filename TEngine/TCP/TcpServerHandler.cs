@@ -31,7 +31,7 @@ namespace TEngine
         /// <param name="context"></param>
         public override void ChannelActive(IChannelHandlerContext context)
         {
-            TLogger.LogInfo(context.ToString());
+            TLogger.LogInfo($"{context.Channel.RemoteAddress}:建立连接 listClients Count:{ClientMgr.Instance.ClientCount}");
             base.ChannelActive(context);
         }
 
@@ -41,11 +41,8 @@ namespace TEngine
         /// <param name="context"></param>
         public override void ChannelInactive(IChannelHandlerContext context)
         {
-            TLogger.LogInfo(context.ToString());
-
             ClientMgr.Instance.DestroyClient(context.Channel);
-
-            TLogger.LogInfo($"断开链接 listClients Count:{ClientMgr.Instance.ClientCount}");
+            TLogger.LogInfo($"{context.Channel.RemoteAddress}:断开链接 listClients Count:{ClientMgr.Instance.ClientCount}");
             base.ChannelInactive(context);
         }
 
