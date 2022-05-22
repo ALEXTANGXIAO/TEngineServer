@@ -46,6 +46,7 @@ namespace TEngine
 
         public override void Release()
         {
+            GameEventMgr.Instance.RemoveEventListener<IChannelHandlerContext, MainPack>(HandleProtoPack, HandleMainPack);
             controllerDic.Clear();
             base.Release();
         }
@@ -54,11 +55,14 @@ namespace TEngine
         {
             if (controllerDic.TryGetValue(mainPack.Requestcode, out BaseController controller))
             {
-                string methodname = mainPack.Actioncode.ToString();                 
+                string methodname = mainPack.Actioncode.ToString();        
+                
                 MethodInfo? method = controller.GetType().GetMethod(methodname);
+
                 if (method == null)
                 {
                     TLogger.LogError($"{mainPack.Requestcode} Had None This Method:{mainPack.Actioncode}");
+
                     return;
                 }
 

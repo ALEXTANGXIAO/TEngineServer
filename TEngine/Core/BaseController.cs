@@ -2,7 +2,7 @@
 
 namespace TEngine
 {
-    public class BaseController
+    public abstract class BaseController
     {
         protected RequestCode requestCode = RequestCode.RequestNone;
 
