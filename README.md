@@ -35,6 +35,8 @@
 
 
 # <strong>TEngineServer v1.0.0
+## <a href="http://1.12.241.46:5000/"><strong>文档快速入门 »</strong></a>
+## <a href="https://github.com/ALEXTANGXIAO/TEngineServer"><strong>客户端GitHub入口 »</strong></a>
 
 ## TEngineServer是一个基于.Net Core的游戏服务端框架。
 .Net Core现在已经更新到了6.0的版本，在性能和设计上其实是远超JAVA。在JAVAER还在为JVM更新和添加更多功能时，其实他们已经被国内大环境所包围了，看不到.Net Core的性能之强，组件化的结构。其实.Net Core最大的问题是大多数自己人都不知道他的优点，甚至很多守旧派抵制core。GO喜欢吹性能，但其实目前来看，除了协程的轻量级，大多数性能测试其实不如JAVA和.Net。
