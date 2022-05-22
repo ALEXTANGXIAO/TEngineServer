@@ -42,9 +42,10 @@ namespace TEngine
         public override void ChannelInactive(IChannelHandlerContext context)
         {
             TLogger.LogInfo(context.ToString());
-            TcpServer.listClients.Remove(context.Channel);
 
-            TLogger.LogInfo($"断开链接 listClients Count:{TcpServer.listClients.Count}");
+            ClientMgr.Instance.DestroyClient(context.Channel);
+
+            TLogger.LogInfo($"断开链接 listClients Count:{ClientMgr.Instance.ClientCount}");
             base.ChannelInactive(context);
         }
 

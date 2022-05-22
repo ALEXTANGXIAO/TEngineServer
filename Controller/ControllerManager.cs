@@ -24,7 +24,7 @@ namespace TEngine
             }
             if (!controllerDic.ContainsKey(requestCode))
             {
-                TLogger.LogInfoSuccessd($"{requestCode} Had Register Successed");
+                TLogger.LogInfoSuccessd($"{requestCode} Controller Register Successed");
 
                 controllerDic[requestCode] = controller;
             }

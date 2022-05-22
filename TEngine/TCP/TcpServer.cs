@@ -14,7 +14,6 @@ namespace TEngine
         public static Int64 count = 0;
         public static DateTime dt1 = DateTime.Now;
         public static DateTime dt2 = DateTime.Now.AddSeconds(1);
-        public static List<IChannel> listClients = new List<IChannel>();
 
         static IChannel? bootstrapChannel;
 
@@ -77,13 +76,13 @@ namespace TEngine
                  
                         pipeline.AddLast(new TcpServerEncoder(), new TcpServerDecoder(),new TcpServerHandler());
 
-                        listClients.Add(channel);
+                        ClientMgr.Instance.AllocClient(channel);
 
-                        TLogger.LogInfoSuccessd($"listClients Count:{listClients.Count}");
+                        TLogger.LogInfoSuccessd($"listClients Count:{ClientMgr.Instance.ClientCount}");
                     }));
                 bootstrapChannel = await bootstrap.BindAsync(port);
 
-                TLogger.LogInfoSuccessd($"启动服务器成功，端口号:{port}");
+                TLogger.LogInfoSuccessd($"启动TCP服务器成功，端口号:{port}");
 
                 Console.ReadLine();
 
@@ -93,7 +92,7 @@ namespace TEngine
             {
                 Console.WriteLine(ex);
 
-                throw new Exception("启动TCPServer 失败\n" + ex.StackTrace);
+                throw new Exception("启动TCP服务器 失败\n" + ex.StackTrace);
             }
             finally
             {
