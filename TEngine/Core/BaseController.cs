@@ -1,4 +1,4 @@
-﻿using SocketGameProtocol;
+﻿using TEngineProto;
 
 namespace TEngine
 {

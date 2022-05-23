@@ -15,5 +15,5 @@ static async Task RunTcpServer()
 
 static void RegisterController()
 {
-    ControllerManager.Instance.RegisterController(SocketGameProtocol.RequestCode.User, new UserController());
+    ControllerManager.Instance.RegisterController(TEngineProto.RequestCode.User, new UserController());
 }

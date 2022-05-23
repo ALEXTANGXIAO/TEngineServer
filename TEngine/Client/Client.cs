@@ -1,5 +1,5 @@
 ﻿using DotNetty.Transport.Channels;
-using SocketGameProtocol;
+using TEngineProto;
 
 namespace TEngine
 {
@@ -29,11 +29,11 @@ namespace TEngine
 
         private void Test()
         {
-            this.WriteAndFlushAsync(new SocketGameProtocol.MainPack
+            this.WriteAndFlushAsync(new TEngineProto.MainPack
             {
-                Actioncode = SocketGameProtocol.ActionCode.Login,
-                Returncode = SocketGameProtocol.ReturnCode.Success,
-                Requestcode = SocketGameProtocol.RequestCode.User
+                Actioncode = TEngineProto.ActionCode.Login,
+                Returncode = TEngineProto.ReturnCode.Success,
+                Requestcode = TEngineProto.RequestCode.User
             });
         }
     }

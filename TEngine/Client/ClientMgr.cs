@@ -1,5 +1,5 @@
 ﻿using DotNetty.Transport.Channels;
-using SocketGameProtocol;
+using TEngineProto;
 
 namespace TEngine
 {

@@ -79,7 +79,7 @@ class UserController : BaseController
 //在合适的时候注册控制器
 static void RegisterController()
 {
-    ControllerManager.Instance.RegisterController(SocketGameProtocol.RequestCode.User, new UserController());
+    ControllerManager.Instance.RegisterController(TEngineProto.RequestCode.User, new UserController());
 }
 
 

@@ -2,7 +2,7 @@
 using DotNetty.Buffers;
 using DotNetty.Transport.Channels;
 using Google.Protobuf;
-using SocketGameProtocol;
+using TEngineProto;
 
 namespace TEngine
 {
