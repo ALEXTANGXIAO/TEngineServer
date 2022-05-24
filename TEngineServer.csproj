@@ -1,5 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
+	  <Compile Remove="DBModels\**" />
+	  <Compile Remove="DBModel\**" />
+	  <EmbeddedResource Remove="DBModels\**" />
+	  <EmbeddedResource Remove="DBModel\**" />
+	  <None Remove="DBModels\**" />
+	  <None Remove="DBModel\**" />
+	</ItemGroup>
+	<ItemGroup>
 	  <PackageReference Include="DotNetty.Buffers" Version="0.7.2" />
 	  <PackageReference Include="DotNetty.Codecs" Version="0.7.2" />
 	  <PackageReference Include="DotNetty.Common" Version="0.7.2" />
@@ -7,6 +15,9 @@
 	  <PackageReference Include="DotNetty.Transport" Version="0.7.2" />
 	  <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
 	  <PackageReference Include="SqlSugarCore" Version="5.0.8.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="DBModel\DBModel.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<Using Include="TEngine" />

@@ -9,6 +9,16 @@
 /[Oo]bj/
 /Properties/
 
+/DBModels/[Bb]in/
+/DBModels/[Bb]uilds/
+/DBModels/[Ll]ogs/
+/DBModels/[Oo]bj/
+
+/DBModel/[Bb]in/
+/DBModel/[Bb]uilds/
+/DBModel/[Ll]ogs/
+/DBModel/[Oo]bj/
+
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
 
