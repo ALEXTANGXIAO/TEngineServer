@@ -1,6 +1,6 @@
 ﻿TLogger.Instance.Active();
 
-SqlSugarMgr.Instance.InitDataBase();
+SqlSugarMgr.Instance.Active();
 
 ControllerManager.Instance.Active();
 

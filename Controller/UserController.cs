@@ -16,8 +16,24 @@ namespace TEngine
 
         public MainPack Register(IChannelHandlerContext channel, MainPack mainPack)
         {
-            //TODO
-            mainPack.Returncode = ReturnCode.Fail;
+            var userName = mainPack.LoginPack.Username;
+            var result = SqlSugarMgr.DataBase.Queryable<User>().Where(user => user.UserName == userName).ToList();
+            if (result.Count > 0)
+            {
+                mainPack.Returncode = ReturnCode.Fail;
+                mainPack.Extstr = "账号已经存在";
+            }
+
+            var user = new User()
+            {
+                UserName = userName,
+                Password = mainPack.LoginPack.Password,
+                RoleName = "",
+            };
+            userService.Add(user);
+
+            mainPack.Returncode = ReturnCode.Success;
+            mainPack.Extstr = "注册成功";
             return mainPack;
         }
 
@@ -32,7 +48,16 @@ namespace TEngine
             }
             else
             {
-
+                if (mainPack.LoginPack.Password == result[0].Password)
+                {
+                    mainPack.Returncode = ReturnCode.Success;
+                    mainPack.Extstr = "登陆成功";
+                }
+                else
+                {
+                    mainPack.Returncode = ReturnCode.Fail;
+                    mainPack.Extstr = "密码错误";
+                }
             }
             
             return mainPack;
