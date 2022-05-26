@@ -54,11 +54,12 @@ namespace TEngine
                 bootstrap
                     //半连接队列的元素上限 
                     .Option(ChannelOption.SoBacklog, 4096)
-                    //设置Channel接的字节流时的缓冲区大小
-                    .Option(ChannelOption.RcvbufAllocator, new AdaptiveRecvByteBufAllocator())
+                     //设置Channel接的字节流时的缓冲区大小
+                     .Option(ChannelOption.RcvbufAllocator, new AdaptiveRecvByteBufAllocator())
                     //设置重用缓冲区
-                    .Option(ChannelOption.Allocator, PooledByteBufferAllocator.Default)
-                    .ChildOption(ChannelOption.Allocator, PooledByteBufferAllocator.Default)
+                     .Option(ChannelOption.Allocator, UnpooledByteBufferAllocator.Default)
+                    //.Option(ChannelOption.Allocator, PooledByteBufferAllocator.Default)
+                    //.ChildOption(ChannelOption.Allocator, PooledByteBufferAllocator.Default)
                     //保持长连接
                     .ChildOption(ChannelOption.SoKeepalive, true)
                     //取消延迟发送（关闭Nagle算法）
@@ -73,7 +74,7 @@ namespace TEngine
                         pipeline.AddLast(new LoggingHandler(LogLevel.INFO));
 
                         //pipeline.AddLast(new EchoServerHandler());
-                 
+
                         pipeline.AddLast(new TcpServerEncoder(), new TcpServerDecoder(),new TcpServerHandler());
 
                         ClientMgr.Instance.AllocClient(channel);

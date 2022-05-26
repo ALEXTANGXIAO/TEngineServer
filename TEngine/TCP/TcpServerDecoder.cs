@@ -13,9 +13,13 @@ namespace TEngine
     {
         protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object> output)
         {
-            var mainPack = ProtoUtil.Deserialize(input.Array);
+            var length = 4 + input.Array[0];
+            IByteBuffer result = Unpooled.Buffer(1024);
+            input.ReadBytes(result,length);
+            var mainPack = ProtoUtil.Deserialize(result.Array);
             TLogger.LogInfo(context.Channel.RemoteAddress +":Received from client:" + mainPack);
             output.Add(mainPack);
+            result.Clear();
             input.Clear();
         }
     }
