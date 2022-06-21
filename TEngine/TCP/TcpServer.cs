@@ -47,19 +47,19 @@ namespace TEngine
             {
                 var bootstrap = new ServerBootstrap();
                 //设置线程组模型为：主从线程模型
-                bootstrap.Group(eventLoop,workerLoop);
+                bootstrap.Group(eventLoop, workerLoop);
                 //设置通道类型
                 bootstrap.Channel<TcpServerSocketChannel>();
 
                 bootstrap
                     //半连接队列的元素上限 
-                    .Option(ChannelOption.SoBacklog, 4096)
+                     .Option(ChannelOption.SoBacklog, 4096)
                      //设置Channel接的字节流时的缓冲区大小
                      .Option(ChannelOption.RcvbufAllocator, new AdaptiveRecvByteBufAllocator())
-                    //设置重用缓冲区
+                     //设置重用缓冲区
                      .Option(ChannelOption.Allocator, UnpooledByteBufferAllocator.Default)
                     //.Option(ChannelOption.Allocator, PooledByteBufferAllocator.Default)
-                    //.ChildOption(ChannelOption.Allocator, PooledByteBufferAllocator.Default)
+                    .ChildOption(ChannelOption.Allocator, UnpooledByteBufferAllocator.Default)
                     //保持长连接
                     .ChildOption(ChannelOption.SoKeepalive, true)
                     //取消延迟发送（关闭Nagle算法）
@@ -75,7 +75,7 @@ namespace TEngine
 
                         //pipeline.AddLast(new EchoServerHandler());
 
-                        pipeline.AddLast(new TcpServerEncoder(), new TcpServerDecoder(),new TcpServerHandler());
+                        pipeline.AddLast(new TcpServerEncoder(), new TcpServerDecoder(), new TcpServerHandler());
 
                         ClientMgr.Instance.AllocClient(channel);
 
@@ -107,7 +107,7 @@ namespace TEngine
         {
             await Task.WhenAll(
                 bootstrapChannel.CloseAsync(),
-                eventLoop.ShutdownGracefullyAsync(TimeSpan.FromSeconds(1),TimeSpan.FromSeconds(2)),
+                eventLoop.ShutdownGracefullyAsync(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2)),
                 workerLoop.ShutdownGracefullyAsync(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(2))
                 );
         }
