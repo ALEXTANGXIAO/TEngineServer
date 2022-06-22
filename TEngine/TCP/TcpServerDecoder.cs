@@ -15,10 +15,18 @@ namespace TEngine
         {
             var length = 4 + input.Array[0];
             IByteBuffer result = Unpooled.Buffer();
-            input.ReadBytes(result,length);
-            var mainPack = ProtoUtil.Deserialize(result.Array);
-            TLogger.LogInfo(context.Channel.RemoteAddress +":Received from client:" + mainPack);
-            output.Add(mainPack);
+            try
+            {
+                input.ReadBytes(result, length);
+                var mainPack = ProtoUtil.Deserialize(result.Array);
+                TLogger.LogInfo(context.Channel.RemoteAddress + ":Received from client:" + mainPack);
+                output.Add(mainPack);
+            }
+            catch (Exception e)
+            {
+                ClientMgr.Instance.DestroyClient(context.Channel);
+                TLogger.LogException(e.ToString());
+            }
             result.Clear();
             input.Clear();
         }
