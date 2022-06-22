@@ -21,6 +21,17 @@ namespace TEngine
             }
         }
 
+        public class BuffConfig
+        {
+            public int BuffID; // BuffID
+            public int BuffType; // BuffType
+            public float BuffValue; // Buff数值
+            public float BuffValue2; // Buff数值2
+            public string BuffName; // Buff名称
+            public int HandleState; // 生效阶段
+            public int CanAddBuff; // 可否叠加
+        }
+
         public ClientMgr()
         {
             GameEventMgr.Instance.AddEventListener<Client,MainPack>(SendProtoPackByClient, SendProtoPack);
